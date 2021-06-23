@@ -1,7 +1,6 @@
 const { Client, GuildMember } = require("discord.js");
 const config = require("./config");
 const { Player, QueryType, QueueRepeatMode} = require("discord-player");
-const { Util } = require("discord-player");
 const client = new Client({
     intents: ["GUILD_VOICE_STATES", "GUILD_MESSAGES", "GUILDS"]
 });
@@ -18,6 +17,10 @@ client.on("warn", console.warn);
 
 // instantiate the player
 const player = new Player(client);
+player.use("YOUTUBE_DL", require("@discord-player/downloader").Downloader);
+
+// in your play command
+const { Util } = require("discord-player");
 
 player.on("error", (queue, error) => {
     console.log(`[${queue.guild.name}] Error emitted from the queue: ${error.message}`);

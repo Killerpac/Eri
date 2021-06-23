@@ -9,6 +9,7 @@
   "author": "Snowflake107",
   "license": "MIT",
   "dependencies": {
+    "@discord-player/downloader": "^2.0.3",
     "@discordjs/opus": "^0.5.3",
     "discord-player": "^5.0.0-dev.2b82fe2b70a044dfb5bbe17afe9990ca0209f0c4",
     "discord.js": "^13.0.0-dev.6cebeae15e97e29acbdaf95bc7b17a1e346a2c34",
