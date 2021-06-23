@@ -1,0 +1,20 @@
+{
+  "name": "music-bot",
+  "version": "1.0.0",
+  "description": "Simple music bot created with discord-player",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "Snowflake107",
+  "license": "MIT",
+  "dependencies": {
+    "@discordjs/opus": "^0.5.3",
+    "discord-player": "^5.0.0-dev.2b82fe2b70a044dfb5bbe17afe9990ca0209f0c4",
+    "discord.js": "^13.0.0-dev.6cebeae15e97e29acbdaf95bc7b17a1e346a2c34",
+    "dotenv": "^10.0.0",
+    "ffmpeg-static": "^4.4.0",
+    "libsodium-wrappers": "^0.7.9",
+    "ytdl-core": "github:Killerpac/hack-node-ytdl-core"
+  }
+}
