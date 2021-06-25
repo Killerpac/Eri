@@ -11,8 +11,8 @@
   "dependencies": {
     "@discord-player/downloader": "^2.0.3",
     "@discordjs/opus": "^0.5.3",
-    "discord-player": "^5.0.0-dev.2b82fe2b70a044dfb5bbe17afe9990ca0209f0c4",
-    "discord.js": "^13.0.0-dev.6cebeae15e97e29acbdaf95bc7b17a1e346a2c34",
+    "discord-player": "^5.0.0-dev.62c16d86dd1723cf212cc9742c3228dd6baf5ac1",
+    "discord.js": "^13.0.0-dev.5af2ef5fbc7ad11281f38384c360ae79efe63b39",
     "dotenv": "^10.0.0",
     "ffmpeg-static": "^4.4.0",
     "libsodium-wrappers": "^0.7.9",
