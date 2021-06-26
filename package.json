@@ -6,13 +6,13 @@
   "scripts": {
     "start": "node index.js"
   },
-  "author": "Snowflake107",
+  "author": "Killerpac",
   "license": "MIT",
   "dependencies": {
     "@discord-player/downloader": "^2.0.3",
     "@discordjs/opus": "^0.5.3",
-    "discord-player": "^5.0.0-dev.62c16d86dd1723cf212cc9742c3228dd6baf5ac1",
-    "discord.js": "^13.0.0-dev.5af2ef5fbc7ad11281f38384c360ae79efe63b39",
+    "discord-player": "^5.0.0-dev.efe3a051f15f248019505d47befe5df3913b743f",
+    "discord.js": "^13.0.0-dev.4714a961b87746b0f85214c756614d276666f285",
     "dotenv": "^10.0.0",
     "ffmpeg-static": "^4.4.0",
     "libsodium-wrappers": "^0.7.9",
