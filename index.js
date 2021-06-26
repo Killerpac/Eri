@@ -16,17 +16,7 @@ client.on("error", console.error);
 client.on("warn", console.warn);
 
 // instantiate the player
-const player = new Player(client,{
-    leaveOnEmpty: true,
-    leaveOnStop: true,
-    leaveOnEnd: true,
-    leaveOnEndCooldown:60000,
-    leaveOnEmptyCooldown:30000,
-    ytdlDownloadOptions: {
-    quality: 'highestaudio'
-},
-    autoSelfDeaf: true
-});
+const player = new Player(client);
 player.on("error", (queue, error) => {
     console.log(`[${queue.guild.name}] Error emitted from the queue: ${error.message}`);
 });
