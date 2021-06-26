@@ -4,7 +4,21 @@ const { Player, QueryType, QueueRepeatMode} = require("discord-player");
 const client = new Client({
     intents: ["GUILD_VOICE_STATES", "GUILD_MESSAGES", "GUILDS"]
 });
-
+const ck = `__Secure-1PAPISID	"UsaS_TMZX2O-NH5s/AiTY4HDqfDOBRoO2J"
+__Secure-1PSID	"_AcU7__GAjnt8hrZMxvnfx0e7GjqEV9PAhsO38X_7gDSypTbRUyDAUzzkou4CksKn6ixBQ."
+__Secure-3PAPISID	"UsaS_TMZX2O-NH5s/AiTY4HDqfDOBRoO2J"
+__Secure-3PSID	"_AcU7__GAjnt8hrZMxvnfx0e7GjqEV9PAhsO38X_7gDSypTbfqn22D3HEXBt_ueYTg0rBg."
+__Secure-3PSIDCC	"AJi4QfHQKeCgt2shiOvEj3oZiCRNpP_-g1_esBfHDw_ju5sgRoBUyRx2WL0FHRJZOMxlTh4zcYI"
+APISID	"Vd5m1NIWPjBmaPy5/A5PdAff-rBId9LKrX"
+HSID	"AF4y6rchER40Q8VQ2"
+LOGIN_INFO	"AFmmF2swRQIgKpFB3heSegnPk0RQcuuwOzzQmqNbwdle0ly_onuAG6wCIQC_HGI9AfVTo5XqvSTn9a7vsudZxr2R-R9NYSgNFUmZyA:QUQ3MjNmeDYxVFh6T09zSWg0TjlWYm5QUko4eExKTGNGam5HTWtmbTFuQktjRE51UHBJdUprY185TFV5X3RRc1YyT09Dc3FPYklaVEg2MXRmZlFKZkh1YXNSYmlFS1Vrczdtc2NsOHI1dk9qZVhnZjRWVFpSOUJkMnZfcEVxRTFKUXdhd0FoSlRJQW5CUFpjeE5QQXItcVNHbElLM2R4SkxR"
+PREF	"tz=America.Los_Angeles"
+SAPISID	"UsaS_TMZX2O-NH5s/AiTY4HDqfDOBRoO2J"
+SID	"_AcU7__GAjnt8hrZMxvnfx0e7GjqEV9PAhsO38X_7gDSypTbfcNl6F8TGJevnxKA98gdcg."
+SIDCC	"AJi4QfGkS-8Jsx6E81KzT3lab_6Vabk_YC0D_GLwwZVjAZ0FjSYs_zQrHVd8QxwBbG5kuQ8GTE0"
+SSID	"AumIjPAqcpyJLmTnA"
+VISITOR_INFO1_LIVE	"g8WEgiH3-wc"
+YSC	"byRGg-MHRKA" `
 client.on("ready", () => {
     console.log("Bot is online!");
     client.user.setActivity({
@@ -16,7 +30,23 @@ client.on("error", console.error);
 client.on("warn", console.warn);
 
 // instantiate the player
-const player = new Player(client);
+const player = new Player(client, {
+    leaveOnEmpty: true,
+    leaveOnStop: true,
+    leaveOnEnd: true,
+    leaveOnEndCooldown:60000,
+    leaveOnEmptyCooldown:30000,
+    enableLive: true,
+    ytdlDownloadOptions: {
+    quality: 'highestaudio',
+    requestOptions: {
+     headers: {
+          cookie: ck
+           }
+        }
+},
+    autoSelfDeaf: true
+});
 player.on("error", (queue, error) => {
     console.log(`[${queue.guild.name}] Error emitted from the queue: ${error.message}`);
 });
