@@ -32,13 +32,10 @@ client.on("warn", console.warn);
 // instantiate the player
 const player = new Player(client, {
     leaveOnEmpty: true,
-    leaveOnStop: true,
     leaveOnEnd: true,
     leaveOnEndCooldown:60000,
     leaveOnEmptyCooldown:30000,
-    enableLive: true,
     ytdlDownloadOptions: {
-    quality: 'highestaudio',
     requestOptions: {
      headers: {
           cookie: ck
