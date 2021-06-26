@@ -17,7 +17,6 @@ client.on("warn", console.warn);
 // instantiate the player
 const player = new Player(client);
 player.use("YOUTUBE_DL", require("@discord-player/downloader").Downloader);
-
 player.on("error", (queue, error) => {
     console.log(`[${queue.guild.name}] Error emitted from the queue: ${error.message}`);
 });
