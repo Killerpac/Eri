@@ -7,7 +7,7 @@ const client = new Client({
 client.on("ready", () => {
     console.log("Bot is online!");
     client.user.setActivity({
-        name: "🎶 | Music Time",
+        name: "🎶 | /Play",
         type: "LISTENING"
     });
     client.user.setStatus("dnd");
