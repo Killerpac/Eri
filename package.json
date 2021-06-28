@@ -9,14 +9,13 @@
   "author": "Killerpac",
   "license": "MIT",
   "dependencies": {
-    "@discord-player/downloader": "^2.0.3",
     "@discordjs/opus": "^0.5.3",
-    "discord-player": "^5.0.0-dev.efe3a051f15f248019505d47befe5df3913b743f",
-    "discord.js": "^13.0.0-dev.4714a961b87746b0f85214c756614d276666f285",
+    "@discordjs/voice": "^0.5.1",
+    "discord-player": "^5.0.0-dev.29489940b64b555e2e791dcf0662bd2d93a22ef6",
+    "discord.js": "^13.0.0-dev.03d3a5cdde5492433d27bbfe46afe0ebf2de5904",
     "dotenv": "^10.0.0",
     "ffmpeg-static": "^4.4.0",
     "libsodium-wrappers": "^0.7.9",
-    "youtube-dl-exec": "^1.2.4",
-    "ytdl-core": "github:D3SOX/node-ytdl-core"
+    "ytdl-core": "^4.8.3"
   }
 }
