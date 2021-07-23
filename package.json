@@ -10,9 +10,9 @@
   "license": "MIT",
   "dependencies": {
     "@discordjs/opus": "^0.5.3",
-    "@discordjs/voice": "^0.5.1",
-    "discord-player": "^5.0.0-dev.29489940b64b555e2e791dcf0662bd2d93a22ef6",
-    "discord.js": "^13.0.0-dev.03d3a5cdde5492433d27bbfe46afe0ebf2de5904",
+    "@discordjs/voice": "^0.5.4",
+    "discord-player": "^5.0.0-dev.399105e.1627041737",
+    "discord.js": "^13.0.0-dev.c8ca7bf.1627041776",
     "dotenv": "^10.0.0",
     "ffmpeg-static": "^4.4.0",
     "libsodium-wrappers": "^0.7.9",
