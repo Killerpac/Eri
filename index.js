@@ -4,7 +4,7 @@ const {  default: DisTube } = require("distube");
 const client = new Client({
     intents: ["GUILD_VOICE_STATES", "GUILD_MESSAGES", "GUILDS"]
 });
-
+const ppap = require("./config")
 client.on("ready", () => {
     console.log("Bot is online!");
     client.user.setActivity({
@@ -247,4 +247,4 @@ client.on("interactionCreate", async (interaction) => {
     }
 });
 
-client.login('ODU1MzY1NTc1NDY2OTQyNDY0.YMxbRQ.kqk3C8Z6oPkmpGJ2zjN6epbCIOQ');
+client.login(ppap.client.token);
