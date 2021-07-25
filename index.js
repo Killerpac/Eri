@@ -16,9 +16,7 @@ client.on("error", console.error);
 client.on("warn", console.warn);
 
 // instantiate the player
-const player = new DisTube(client,{
-    emitNewSongOnly: true
-});
+const player = new DisTube(client)
 
 player.on("error", (queue, error) => {
     console.log(`[${queue.guild.name}] Error emitted from the queue: ${error.message}`);
