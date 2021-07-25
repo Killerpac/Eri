@@ -1,4 +1,6 @@
 require('dotenv').config()
 module.exports = {
-    token: process.env['TOKEN']
+    client: {
+        token: process.env.TOKEN,
+    },
 };

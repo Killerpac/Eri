@@ -10,12 +10,12 @@
   "license": "MIT",
   "dependencies": {
     "@discordjs/opus": "^0.5.3",
-    "@discordjs/voice": "^0.5.4",
-    "discord-player": "^5.0.0-dev.399105e.1627041737",
-    "discord.js": "^13.0.0-dev.c8ca7bf.1627041776",
+    "@discordjs/voice": "^0.5.5",
+    "discord.js": "^13.0.0-dev.4886ae2.1627171445",
+    "distube": "^3.0.0-alpha.17",
     "dotenv": "^10.0.0",
     "ffmpeg-static": "^4.4.0",
     "libsodium-wrappers": "^0.7.9",
-    "ytdl-core": "^4.8.3"
+    "ytdl-core": "^4.9.0"
   }
 }
