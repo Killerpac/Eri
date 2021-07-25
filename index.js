@@ -17,15 +17,11 @@ client.on("warn", console.warn);
 
 // instantiate the player
 const player = new DisTube(client,{
-    searchSongs: 10,
-    emitNewSongOnly: true,
+    emitNewSongOnly: true
 });
 
 player.on("error", (queue, error) => {
     console.log(`[${queue.guild.name}] Error emitted from the queue: ${error.message}`);
-});
-player.on("connectionError", (queue, error) => {
-    console.log(`[${queue.guild.name}] Error emitted from the connection: ${error.message}`);
 });
 
 player.on("playSong", (queue, song) => {
@@ -48,8 +44,8 @@ player.on("empty", (queue) => {
     queue.textChannel.send("❌ | Nobody is in the voice channel, leaving...");
 });
 
-player.on("queueEnd", (queue) => {
-    queue.textChannel.send("✅ | Queue finished!");
+player.on("finish", (queue) => {
+    queue.textChannel.send("✅ | End Of Queue");
 });
 
 client.on("messageCreate", async (message) => {
