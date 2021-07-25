@@ -4,7 +4,6 @@ const {  default: DisTube } = require("distube");
 const client = new Client({
     intents: ["GUILD_VOICE_STATES", "GUILD_MESSAGES", "GUILDS"]
 });
-const SpotifyPlugin = require("@distube/spotify")
 
 client.on("ready", () => {
     console.log("Bot is online!");
