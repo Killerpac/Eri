@@ -12,7 +12,7 @@ client.on("warn", console.warn);
 const player = new DisTube(client,{
     youtubeDL:true,
     youtubeCookie:ppap.client.cookie,
-    updateYouTubeDL:false
+    updateYouTubeDL:true,
 })
  
 player.on("error", (queue, error) => {
