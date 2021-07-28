@@ -10,7 +10,7 @@ client.on("warn", console.warn);
 
 // instantiate the player
 const player = new DisTube(client)
-
+ 
 player.on("error", (queue, error) => {
     queue.send(`❌ | [${queue.guild.name}] Error emitted from the queue: ${error.message}`);
 });
