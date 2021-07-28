@@ -10,8 +10,7 @@ client.on("warn", console.warn);
 
 // instantiate the player
 const player = new DisTube(client,{
-    youtubeDL:true,
-    updateYouTubeDL:true,
+    youtubeDL:false,
 })
  
 player.on("error", (queue, error) => {
