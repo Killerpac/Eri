@@ -16,7 +16,7 @@ player.on("error", (queue, error) => {
 });
 
 player.on("playSong", (queue, song) => {
-    queue.textChannel.send(`🎶 | Started playing: **${song.name}** in **${queue.voiceChannel.name}**!`);
+    queue.textChannel.send(`🎶 | Playing: **${song.name}** in **${queue.voiceChannel.name}**!`);
 });
 
 player.on("addList", (queue, playlist) => {
@@ -24,7 +24,7 @@ player.on("addList", (queue, playlist) => {
 });
 
 player.on("addSong", (queue, song) => {
-    queue.textChannel.send(`🎶 | song **${song.name}** queued!`);
+    queue.textChannel.send(`🎶 | **${song.name}** queued!`);
 });
 
 player.on("disconnect", (queue) => {
