@@ -10,15 +10,9 @@ client.on("warn", console.warn);
 
 // instantiate the player
 const player = new DisTube(client,{
-    youtubeDL:false,
-    ytdlOptions: {
-        quality: 'highestaudio',
-        requestOptions: {
-         headers: {
-              cookie: ppap.client.cookie
-               }
-            }
-    },
+    youtubeDL:true,
+    youtubeCookie:ppap.client.cookie,
+    updateYouTubeDL:false
 })
  
 player.on("error", (queue, error) => {
