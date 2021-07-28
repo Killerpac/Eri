@@ -12,7 +12,7 @@ client.on("warn", console.warn);
 const player = new DisTube(client)
 
 player.on("error", (queue, error) => {
-    console.log(`[${queue.guild.name}] Error emitted from the queue: ${error.message}`);
+    queue.textChannel.send(`[${queue.guild.name}] Error emitted from the queue: ${error.message}`);
 });
 
 player.on("playSong", (queue, song) => {
