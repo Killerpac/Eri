@@ -16,7 +16,7 @@ player.on("error", (queue, error) => {
 });
 
 player.on("playSong", (queue, song) => {
-    queue.textChannel.send(`🎶 | Started playing: **${song.name}** in **${queue.textChannel.name}**!`);
+    queue.textChannel.send(`🎶 | Started playing: **${song.name}** in **${queue.voiceChannel.name}**!`);
 });
 
 player.on("addList", (queue, playlist) => {
