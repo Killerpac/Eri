@@ -279,8 +279,6 @@ client.on("interactionCreate", async (interaction) => {
         await interaction.deferReply();
         const queue = player.getQueue(interaction.guildId);
         if (!queue || !queue.playing) return void interaction.followUp({ content: "❌ | No music is being played!" });
-        que.forEach(Element => Element.delete())
-        que = []
         queue.destroy();
         return void interaction.followUp({ content: "🛑 | Stopped the player!" });
     } else if (interaction.commandName === "np") {
