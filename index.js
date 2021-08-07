@@ -1,58 +1,73 @@
 const { Client, GuildMember } = require("discord.js");
-const {  default: DisTube } = require("distube");
+const ppap = require("./config");
+const { Player, QueryType, QueueRepeatMode } = require("discord-player");
 
 const client = new Client({
     intents: ["GUILD_VOICE_STATES", "GUILD_MESSAGES", "GUILDS"]
 });
-const ppap = require("./config")
+let colour = "#ff8896"
+client.on("ready", () => {
+    console.log("Bot is online!");
+    client.user.setActivity({
+        name: "🎶 | Music Time",
+        type: "LISTENING"
+    });
+});
 client.on("error", console.error);
 client.on("warn", console.warn);
 
 // instantiate the player
-const player = new DisTube(client,{
-    youtubeDL:true,
-    youtubeCookie:ppap.client.cookie,
-    updateYouTubeDL:true,
-})
- 
+const player = new Player(client,{
+});
+
 player.on("error", (queue, error) => {
-    queue.send(`❌ | [${queue.guild.name}] Error emitted from the queue: ${error.message}`);
+    console.log(`[${queue.guild.name}] Error emitted from the queue: ${error.message}`);
+});
+player.on("connectionError", (queue, error) => {
+    console.log(`[${queue.guild.name}] Error emitted from the connection: ${error.message}`);
 });
 
-player.on("playSong", (queue, song) => {
-    queue.textChannel.send(`🎶 | Playing: **${song.name}** in **${queue.voiceChannel.name}**!`);
+player.on("trackStart", (queue, track) => {
+    queue.metadata.send({embeds:[{title:`🎶 | Now Playing`,description:`[${track.title}](${track.url}) in **${queue.connection.channel.name}**!`,color:`${colour}`}]});
 });
 
-player.on("addList", (queue, playlist) => {
-    queue.textChannel.send(`Added \`${playlist.name}\` playlist (${playlist.songs.length} songs) to the queue!`);
+player.on("trackAdd", (queue, track) => {
+    queue.metadata.send({embeds:[{description:`[${track.title}](${track.url}) Queued`,color:`${colour}`}]});
 });
 
-player.on("addSong", (queue, song) => {
-    queue.textChannel.send(`🎶 | **${song.name}** queued!`);
+player.on("botDisconnect", (queue) => {
+    queue.metadata.send("❌ | I was manually disconnected from the voice channel, clearing queue!");
 });
 
-player.on("disconnect", (queue) => {
-    queue.textChannel.send("❌ | I was manually disconnected from the voice channel, clearing queue!");
+player.on("channelEmpty", (queue) => {
+    queue.metadata.send("❌ | Nobody is in the voice channel, leaving...");
 });
 
-player.on("empty", (queue) => {
-    queue.textChannel.send("❌ | Nobody is in the voice channel, leaving...");
+player.on("queueEnd", (queue) => {
+    queue.metadata.send("✅ | Queue finished!");
 });
 
-player.on("finish", (queue) => {
-    queue.textChannel.send("✅ | End Of Queue");
-});
+client.on("messageCreate", async (message) => {
+    if (message.author.bot || !message.guild) return;
+    if (!client.application?.owner) await client.application?.fetch();
 
-client.on("ready", async () => {
-    console.log("Bot is online!");
-   await client.user.setActivity({
-        name: "🎶 | Music Time",
-        type: "LISTENING"
-    });
-        await client.application.commands.set([
+    if (message.content === "!deploy" && message.author.id === client.application?.owner?.id) {
+        await message.guild.commands.set([
             {
                 name: "play",
                 description: "Plays a song from youtube",
+                options: [
+                    {
+                        name: "query",
+                        type: "STRING",
+                        description: "The song you want to play",
+                        required: true
+                    }
+                ]
+            },
+            {
+                name: "soundcloud",
+                description: "Plays a song from soundcloud",
                 options: [
                     {
                         name: "query",
@@ -86,15 +101,19 @@ client.on("ready", async () => {
                         choices: [
                             {
                                 name: "Off",
-                                value: 0
+                                value: QueueRepeatMode.OFF
                             },
                             {
-                                name: "Current Song",
-                                value: 1
+                                name: "Track",
+                                value: QueueRepeatMode.TRACK
                             },
                             {
-                                name: "Queue Loop",
-                                value: 2
+                                name: "Queue",
+                                value: QueueRepeatMode.QUEUE
+                            },
+                            {
+                                name: "Autoplay",
+                                value: QueueRepeatMode.AUTOPLAY
                             }
                         ]
                     }
@@ -124,7 +143,14 @@ client.on("ready", async () => {
                 name: "np",
                 description: "Now Playing"
             },
+            {
+                name: "bassboost",
+                description: "Toggles bassboost filter"
+            }
         ]);
+
+        await message.reply("Deployed!");
+    }
 });
 
 client.on("interactionCreate", async (interaction) => {
@@ -138,15 +164,34 @@ client.on("interactionCreate", async (interaction) => {
         return void interaction.reply({ content: "You are not in my voice channel!", ephemeral: true });
     }
 
-    if (interaction.commandName === "play") {
-        interaction.defer();
+    if (interaction.commandName === "play" || interaction.commandName === "soundcloud") {
+        await interaction.deferReply()
+
         const query = interaction.options.get("query").value;
-        if(!query) return void interaction.reply({ content: "You need to specify a song to play!", ephemeral: true });
-        if(query.toLowerCase().includes('spotify')) return void interaction.followUp("Spotify is not Suported for now");
-        await player.playVoiceChannel(interaction.member.voice.channel, `${query}`,{textChannel: interaction.channel});
-        await interaction.followUp({ content: `⏱ | Loading ...` });
+        const searchResult = await player
+            .search(query, {
+                requestedBy: interaction.user,
+                searchEngine: interaction.commandName === "soundcloud" ? QueryType.SOUNDCLOUD_SEARCH : QueryType.AUTO
+            })
+            .catch(() => {});
+        if (!searchResult || !searchResult.tracks.length) return void interaction.followUp({ content: "No results were found!" , ephemeral: true });
+
+        const queue = await player.createQueue(interaction.guild, {
+            metadata: interaction.channel
+        });
+
+        try {
+            if (!queue.connection) await queue.connect(interaction.member.voice.channel);
+        } catch {
+            void player.deleteQueue(interaction.guildId);
+            return void interaction.followUp({ content: "Could not join your voice channel!" });
+        }
+
+        await interaction.deleteReply()
+        searchResult.playlist ? queue.addTracks(searchResult.tracks) : queue.addTrack(searchResult.tracks[0]);
+        if (!queue.playing) await queue.play();
     } else if (interaction.commandName === "volume") {
-        await interaction.defer();
+        await interaction.deferReply({ ephemeral: true });
         const queue = player.getQueue(interaction.guildId);
         if (!queue || !queue.playing) return void interaction.followUp({ content: "❌ | No music is being played!" });
         const vol = interaction.options.get("amount");
@@ -157,77 +202,95 @@ client.on("interactionCreate", async (interaction) => {
             content: success ? `✅ | Volume set to **${vol.value}%**!` : "❌ | Something went wrong!"
         });
     } else if (interaction.commandName === "skip") {
-        await interaction.defer();
+        await interaction.deferReply({ ephemeral: true });
         const queue = player.getQueue(interaction.guildId);
         if (!queue || !queue.playing) return void interaction.followUp({ content: "❌ | No music is being played!" });
-        const currentsong = queue.songs[0]
+        const currentTrack = queue.current;
         const success = queue.skip();
         return void interaction.followUp({
-            content: success ? `✅ | Skipped **${currentsong.name}**!` : "❌ | Something went wrong!"
+            content: success ? `✅ | Skipped **${currentTrack}**!` : "❌ | Something went wrong!"
         });
     } else if (interaction.commandName === "queue") {
-        await interaction.defer();
+        await interaction.deferReply();
         const queue = player.getQueue(interaction.guildId);
         if (!queue || !queue.playing) return void interaction.followUp({ content: "❌ | No music is being played!" });
-        const currentsong = queue.songs[0];
-        const songs = queue.songs.slice(0, 10).map((m, i) => {
-            return `${i + 1}. **${m.name}**`;
+        const currentTrack = queue.current;
+        const tracks = queue.tracks.slice(0, 10).map((m, i) => {
+            return `${i + 1}. **${m.title}**`;
         });
 
         return void interaction.followUp({
             embeds: [
                 {
                     title: "Server Queue",
-                    description: `${songs.join("\n")}${
-                        queue.songs.length > songs.length
-                            ? `\n...${queue.songs.length - songs.length === 1 ? `${queue.songs.length - songs.length} more song` : `${queue.songs.length - songs.length} more songs`}`
+                    description: `${tracks.join("\n")}${
+                        queue.tracks.length > tracks.length
+                            ? `\n...${queue.tracks.length - tracks.length === 1 ? `${queue.tracks.length - tracks.length} more track` : `${queue.tracks.length - tracks.length} more tracks`}`
                             : ""
                     }`,
                     color: 0xff0000,
-                    fields: [{ name: "Now Playing", value: `🎶 | **${currentsong.name}**` }]
+                    fields: [{ name: "Now Playing", value: `🎶 | **${currentTrack.title}**` }]
                 }
             ]
         });
     } else if (interaction.commandName === "pause") {
-        await interaction.defer();
+        await interaction.deferReply();
         const queue = player.getQueue(interaction.guildId);
         if (!queue || !queue.playing) return void interaction.followUp({ content: "❌ | No music is being played!" });
-        const success = queue.pause();
+        const success = queue.setPaused(true);
         return void interaction.followUp({ content: success ? "⏸ | Paused!" : "❌ | Something went wrong!" });
     } else if (interaction.commandName === "resume") {
-        await interaction.defer();
+        await interaction.deferReply();
         const queue = player.getQueue(interaction.guildId);
         if (!queue || !queue.playing) return void interaction.followUp({ content: "❌ | No music is being played!" });
-        const success = queue.resume();
+        const success = queue.setPaused(false);
         return void interaction.followUp({ content: success ? "▶ | Resumed!" : "❌ | Something went wrong!" });
     } else if (interaction.commandName === "stop") {
-        await interaction.defer();
+        await interaction.deferReply();
         const queue = player.getQueue(interaction.guildId);
         if (!queue || !queue.playing) return void interaction.followUp({ content: "❌ | No music is being played!" });
-        queue.stop();
+        queue.destroy();
         return void interaction.followUp({ content: "🛑 | Stopped the player!" });
     } else if (interaction.commandName === "np") {
-        await interaction.defer();
+        await interaction.deferReply();
         const queue = player.getQueue(interaction.guildId);
         if (!queue || !queue.playing) return void interaction.followUp({ content: "❌ | No music is being played!" });
+        const progress = queue.createProgressBar();
+        const perc = queue.getPlayerTimestamp();
 
         return void interaction.followUp({
             embeds: [
                 {
                     title: "Now Playing",
-                    description: `🎶 | **${queue.songs[0].name}**! (\`${queue.formattedCurrentTime}%\`)`,
-                    color: 0xff6869
+                    description: `🎶 | **${queue.current.title}**! (\`${perc.progress}%\`)`,
+                    fields: [
+                        {
+                            name: "\u200b",
+                            value: progress
+                        }
+                    ],
+                    color: 0xffffff
                 }
             ]
         });
     } else if (interaction.commandName === "loop") {
-        await interaction.defer();
+        await interaction.deferReply();
         const queue = player.getQueue(interaction.guildId);
         if (!queue || !queue.playing) return void interaction.followUp({ content: "❌ | No music is being played!" });
         const loopMode = interaction.options.get("mode").value;
-        let mode = queue.setRepeatMode(loopMode);
-        mode = mode ? mode == 2 ? "🔁" : "🔂" : "Off";
-        return void interaction.followUp({ content: mode ? `${mode} | Updated loop mode!` : "❌ | Could not update loop mode!" });
+        const success = queue.setRepeatMode(loopMode);
+        const mode = loopMode === QueueRepeatMode.TRACK ? "🔂" : loopMode === QueueRepeatMode.QUEUE ? "🔁" : "▶";
+        return void interaction.followUp({ content: success ? `${mode} | Updated loop mode!` : "❌ | Could not update loop mode!" });
+    } else if (interaction.commandName === "bassboost") {
+        await interaction.deferReply();
+        const queue = player.getQueue(interaction.guildId);
+        if (!queue || !queue.playing) return void interaction.followUp({ content: "❌ | No music is being played!" });
+        await queue.setFilters({
+            bassboost: !queue.getFiltersEnabled().includes("bassboost"),
+            normalizer2: !queue.getFiltersEnabled().includes("bassboost") // because we need to toggle it with bass
+        });
+
+        return void interaction.followUp({ content: `🎵 | Bassboost ${queue.getFiltersEnabled().includes("bassboost") ? "Enabled" : "Disabled"}!` });
     } else {
         interaction.reply({
             content: "Unknown command!",
@@ -235,7 +298,5 @@ client.on("interactionCreate", async (interaction) => {
         });
     }
 });
-
 client.login(ppap.client.token);
-require("./server")
 

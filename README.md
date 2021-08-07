@@ -1,2 +1,2 @@
 # Music Bot
-Slash commands music bot backed by **Distube**.
+Slash commands music bot backed by **Discord Player**.
