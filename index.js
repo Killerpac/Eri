@@ -15,7 +15,7 @@ client.on("ready", () => {
 });
 client.on("error", console.error);
 client.on("warn", console.warn);
-let mes = null
+let mean = null
 // instantiate the player
 const player = new Player(client,{
     leaveOnEnd:true,
@@ -32,12 +32,18 @@ player.on("connectionError", (queue, error) => {
 });
 
 player.on("trackStart", (queue, track) => {
-    queue.metadata.send({embeds:[{title:`🎶 | Now Playing`,description:`[${track.title}](${track.url}) in **${queue.connection.channel.name}**!`,color:`${colour}`}]})
+    queue.metadata.send({embeds:[{title:`🎶 | Now Playing`,description:`[${track.title}](${track.url}) in **${queue.connection.channel.name}**!`,color:`${colour}`}]}).then(async mes => {
+        mean = mes
+    });
 });
 
 player.on("trackAdd", (queue, track) => {
-    queue.metadata.send({embeds:[{description:`[${track.title}](${track.url}) Queued`,color:`${colour}`}]});
+    queue.metadata.send({embeds:[{description:`[${track.title}](${track.url}) Queued`,color:`${colour}`}]})
 });
+
+player.on("trackEnd",(queue,track) => {
+    mean.delete()
+})
 
 player.on("botDisconnect", (queue) => {
     queue.metadata.send("❌ | I was manually disconnected from the voice channel, clearing queue!");
