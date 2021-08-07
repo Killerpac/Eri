@@ -258,7 +258,7 @@ client.on("interactionCreate", async (interaction) => {
                             ? `\n...${queue.tracks.length - tracks.length === 1 ? `${queue.tracks.length - tracks.length} more track` : `${queue.tracks.length - tracks.length} more tracks`}`
                             : ""
                     }`,
-                    color: 0xff0000,
+                    color: colour,
                     fields: [{ name: "Now Playing", value: `🎶 | **${currentTrack.title}**` }]
                 }
             ]
