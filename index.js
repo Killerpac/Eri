@@ -16,12 +16,24 @@ client.on("ready", () => {
 client.on("error", console.error);
 client.on("warn", console.warn);
 let mean = null
+let que = []
 // instantiate the player
 const player = new Player(client,{
-    leaveOnEnd:true,
-    leaveOnEmpty:true,
-    leaveOnEmptyCooldown:30000,
-    leaveOnEndCooldown:60000
+        leaveOnEmpty: true,
+        leaveOnStop: true,
+        leaveOnEnd: true,
+        leaveOnEndCooldown:60000,
+        leaveOnEmptyCooldown:30000,
+        enableLive: true,
+        ytdlDownloadOptions: {
+        filter:"audio",
+        requestOptions: {
+         headers: {
+              cookie: ppap.client.cookie
+               }
+            }
+    },
+        autoSelfDeaf: true
 });
 
 player.on("error", (queue, error) => {
@@ -38,22 +50,30 @@ player.on("trackStart", (queue, track) => {
 });
 
 player.on("trackAdd", (queue, track) => {
-    queue.metadata.send({embeds:[{description:`[${track.title}](${track.url}) Queued`,color:`${colour}`}]})
+    queue.metadata.send({embeds:[{description:`[${track.title}](${track.url}) Queued`,color:`${colour}`}]}).then(owo =>{
+        que.push(owo)
+    })
 });
 
 player.on("trackEnd",(queue,track) => {
     mean.delete()
 })
 
-player.on("botDisconnect", (queue) => {
+player.on("botDisconnect",async (queue) => {
+    await que.forEach(Element => Element.delete())
+    que = []
     queue.metadata.send("❌ | I was manually disconnected from the voice channel, clearing queue!");
 });
 
-player.on("channelEmpty", (queue) => {
+player.on("channelEmpty",async (queue) => {
+    await que.forEach(Element => Element.delete())
+    que = []
     queue.metadata.send("❌ | Nobody is in the voice channel, leaving...");
 });
 
-player.on("queueEnd", (queue) => {
+player.on("queueEnd", async (queue) => {
+    await que.forEach(Element => Element.delete())
+    que = []
     queue.metadata.send("✅ | Queue finished!");
 });
 
@@ -259,6 +279,8 @@ client.on("interactionCreate", async (interaction) => {
         await interaction.deferReply();
         const queue = player.getQueue(interaction.guildId);
         if (!queue || !queue.playing) return void interaction.followUp({ content: "❌ | No music is being played!" });
+        que.forEach(Element => Element.delete())
+        que = []
         queue.destroy();
         return void interaction.followUp({ content: "🛑 | Stopped the player!" });
     } else if (interaction.commandName === "np") {
