@@ -15,9 +15,13 @@ client.on("ready", () => {
 });
 client.on("error", console.error);
 client.on("warn", console.warn);
-
+let mes = null
 // instantiate the player
 const player = new Player(client,{
+    leaveOnEnd:true,
+    leaveOnEmpty:true,
+    leaveOnEmptyCooldown:30000,
+    leaveOnEndCooldown:60000
 });
 
 player.on("error", (queue, error) => {
@@ -28,7 +32,7 @@ player.on("connectionError", (queue, error) => {
 });
 
 player.on("trackStart", (queue, track) => {
-    queue.metadata.send({embeds:[{title:`🎶 | Now Playing`,description:`[${track.title}](${track.url}) in **${queue.connection.channel.name}**!`,color:`${colour}`}]});
+    queue.metadata.send({embeds:[{title:`🎶 | Now Playing`,description:`[${track.title}](${track.url}) in **${queue.connection.channel.name}**!`,color:`${colour}`}]})
 });
 
 player.on("trackAdd", (queue, track) => {
