@@ -21,7 +21,7 @@ module.exports = {
                         ? `\n...${queue.tracks.length - tracks.length === 1 ? `${queue.tracks.length - tracks.length} more track` : `${queue.tracks.length - tracks.length} more tracks`}`
                         : ""
                 }`,
-                color: colour,
+                color: client.colour,
                 fields: [{ name: "Now Playing", value: `🎶 | **${currentTrack.title}**` }]
             }
         ]

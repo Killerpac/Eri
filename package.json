@@ -1,6 +1,6 @@
 {
   "name": "music-bot",
-  "version": "2.0",
+  "version": "2.0.0",
   "description": "Simple music bot created with discord-player",
   "main": "index.js",
   "repository": "https://github.com/Killerpac/Eri",
