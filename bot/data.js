@@ -7,19 +7,7 @@ module.exports = {
     },
     {
         name: "play",
-        description: "Plays a song from youtube",
-        options: [
-            {
-                name: "query",
-                type: "STRING",
-                description: "The song you want to play",
-                required: true
-            }
-        ]
-    },
-    {
-        name: "soundcloud",
-        description: "Plays a song from soundcloud",
+        description: "Plays a song",
         options: [
             {
                 name: "query",
@@ -74,6 +62,10 @@ module.exports = {
     {
         name: "skip",
         description: "Skip to the current song"
+    },
+    {
+        name: "shuffle",
+        description: "Shuffles The Queue"
     },
     {
         name: "queue",

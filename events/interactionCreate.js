@@ -1,4 +1,3 @@
-const { Player } = require("discord-player");
 module.exports = (client,interaction) =>
 {
     if (!interaction.isCommand() || !interaction.guildId) return;
@@ -7,5 +6,5 @@ module.exports = (client,interaction) =>
 
 	const cmd = client.commands.get(interaction.commandName)
 
-    if(cmd) cmd.execute(client, interaction, Player);
+    if(cmd) cmd.execute(client, interaction);
 }

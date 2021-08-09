@@ -1,7 +1,7 @@
 require('dotenv').config()
 module.exports = {
     discord: {
-        activity:"Playing Music",
+        activity:"With Slash /play",
         token: process.env.TOKEN,
         cookie: process.env.COOKIE,
         ne:null,
