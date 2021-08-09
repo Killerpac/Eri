@@ -6,7 +6,7 @@ tags:
   - javascript
 ---
 
-##Eri
+## Eri
 
 Slash commands music bot backed by **Discord Player**.
 
