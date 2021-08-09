@@ -4,6 +4,6 @@ module.exports = {
         activity:"With Slash /play",
         token: process.env.TOKEN,
         cookie: process.env.COOKIE,
-        ne:null,
+        ne:[]
     },
 };
