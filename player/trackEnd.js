@@ -1,4 +1,4 @@
-module.exports = (client,queue,track) => {
-    const x =client.config.discord.client.map(m => m.guild == queue.metadata.guild)
-    x.delete()
+module.exports = async (client,queue,track) => {
+    const x =client.config.discord.ne.find(m => m.guild == queue.metadata.guild)
+    await x.delete();
 }
