@@ -1,12 +1,12 @@
 ---
-title: Nino Bot
+title: Eri
 description: A Discord bot For playing music
 tags:
   - discord.js
   - javascript
 ---
 
-#Eri
+##Eri
 
 Slash commands music bot backed by **Discord Player**.
 
