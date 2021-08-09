@@ -1,19 +1,21 @@
 {
   "name": "music-bot",
-  "version": "1.0.0",
+  "version": "2.0",
   "description": "Simple music bot created with discord-player",
   "main": "index.js",
   "repository": "https://github.com/Killerpac/Eri",
   "scripts": {
-    "start": "node index.js"
+    "start": "node eri.js"
   },
   "author": "Killerpac",
   "license": "MIT",
   "dependencies": {
     "@discordjs/opus": "^0.5.3",
-    "@discordjs/voice": "^0.5.5",
-    "discord-player": "^5.0.0-dev.1628294547.03bc958",
-    "discord.js": "^13.0.0",
+    "@discordjs/rest": "^0.1.0-canary.0",
+    "@discordjs/voice": "^0.5.6",
+    "discord-api-types": "^0.22.0",
+    "discord-player": "^5.0.1",
+    "discord.js": "^13.0.1",
     "dotenv": "^10.0.0",
     "ffmpeg-static": "^4.4.0",
     "libsodium-wrappers": "^0.7.9",
