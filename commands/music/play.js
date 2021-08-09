@@ -29,7 +29,7 @@ module.exports = {
             leaveOnEnd: true,
             leaveOnEmptyCooldown: 30000,
             ytdlOptions:{
-                quality:highestaudio,
+                quality:"highestaudio",
             }
         });
 
