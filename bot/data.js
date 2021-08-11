@@ -11,7 +11,7 @@ module.exports = {
         options: [
             {
                 name: "query",
-                type: "STRING",
+                type: 3,
                 description: "The song you want to play",
                 required: true
             }
@@ -23,7 +23,7 @@ module.exports = {
         options: [
             {
                 name: "amount",
-                type: "INTEGER",
+                type: 4,
                 description: "The volume amount to set (0-100)",
                 required: false
             }
@@ -35,7 +35,7 @@ module.exports = {
         options: [
             {
                 name: "mode",
-                type: "INTEGER",
+                type: 4,
                 description: "Loop type",
                 required: true,
                 choices: [

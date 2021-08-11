@@ -37,3 +37,4 @@ for (const file of player) {
 }
 
 client.login(client.config.discord.token)
+require("./reload")
