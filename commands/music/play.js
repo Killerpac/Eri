@@ -30,7 +30,7 @@ module.exports = {
             leaveOnEmptyCooldown: 30000,
             ytdlOptions:{
                 quality:"highestaudio",
-                highWaterMark:1024*1024*10,
+                highWaterMark: 1,
                 requestOptions: {
                     headers: {
                         cookie: client.config.discord.cookie
