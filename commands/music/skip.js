@@ -1,3 +1,4 @@
+const { GuildMember } = require("discord.js");
 module.exports = {
     name: 'skip',
     category: 'Music',
