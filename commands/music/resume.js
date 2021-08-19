@@ -14,8 +14,8 @@ module.exports = {
     }
     await interaction.deferReply();
             const queue = client.player.getQueue(interaction.guildId);
-            if (!queue || !queue.playing) return void interaction.followUp({ content: "❌ | No music is being played!" });
-            const success = queue.setPaused(false);
+            if (!queue || !queue.paused) return void interaction.followUp({ content: "❌ | No music is being played!" });
+            const success = queue.resume();
             return void interaction.followUp({ content: success ? "▶ | Resumed!" : "❌ | Something went wrong!" });
    }
 }

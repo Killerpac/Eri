@@ -15,10 +15,10 @@ module.exports = {
             await interaction.deferReply({ ephemeral: true });
             const queue = client.player.getQueue(interaction.guildId);
             if (!queue || !queue.playing) return void interaction.followUp({ content: "❌ | No music is being played!" });
-            const currentTrack = queue.current;
+            const currentTrack = queue.songs[0];
             const success = queue.skip();
             return void interaction.followUp({
-                content: success ? `✅ | Skipped **${currentTrack}**!` : "❌ | Something went wrong!"
+                content: success ? `✅ | Skipped **${currentTrack.name}**!` : "❌ | Something went wrong!"
         });
     }
 }

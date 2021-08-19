@@ -1,4 +1,3 @@
-const {QueueRepeatMode} = require('discord-player')
 module.exports = { 
     commands:[
     {
@@ -41,19 +40,15 @@ module.exports = {
                 choices: [
                     {
                         name: "Off",
-                        value: QueueRepeatMode.OFF
+                        value: 0
                     },
                     {
                         name: "Track",
-                        value: QueueRepeatMode.TRACK
+                        value: 1
                     },
                     {
                         name: "Queue",
-                        value: QueueRepeatMode.QUEUE
-                    },
-                    {
-                        name: "Autoplay",
-                        value: QueueRepeatMode.AUTOPLAY
+                        value: 2
                     }
                 ]
             }
@@ -90,5 +85,9 @@ module.exports = {
     {
         name: "bassboost",
         description: "Toggles bassboost filter"
+    },
+    {
+        name: "autoplay",
+        description: "Toggles Autoplay"
     }
 ] };

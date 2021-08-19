@@ -1,15 +1,20 @@
-const { Client, Collection} = require("discord.js");
-const { Player, QueryType, QueueRepeatMode } = require("discord-player");
+const { Client, Collection, Intents} = require("discord.js");
+const distube = require("distube")
 const fs = require('fs');
-const client = new Client({
-    intents: ["GUILD_VOICE_STATES", "GUILD_MESSAGES", "GUILDS"]
-});
+const { SpotifyPlugin } = require("@distube/spotify");
+const client = new Client({ intents: [Intents.FLAGS.GUILDS,Intents.FLAGS.GUILD_MESSAGES,Intents.FLAGS.GUILD_VOICE_STATES,Intents.FLAGS.GUILDS] });
 client.config = require("./bot/config")
 client.commands = new Collection();
-client.player = new Player(client);
-client.QueryType = QueryType
-client.QueueRepeatMode = QueueRepeatMode
 client.colour = "#f542bf"
+client.player = new distube.DisTube(client,{
+    leaveOnEmpty: true,
+    leaveOnFinish:true,
+    emptyCooldown:30000,
+    youtubeCookie:client.config.discord.cookie,
+    plugins:[new SpotifyPlugin({
+        emitEventsAfterFetching: true
+    })]
+});
 
 fs.readdirSync('./commands').forEach(dirs => {
     const commands = fs.readdirSync(`./commands/${dirs}`).filter(files => files.endsWith('.js'));

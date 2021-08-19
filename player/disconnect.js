@@ -1,5 +1,5 @@
-module.exports = (client ,queue, error) => {
-    console.log(`[${queue.guild.name}] Error emitted from the queue: ${error.message}`);
+module.exports = async (client, queue) => {
+    queue.textChannel.send({embeds:[{description:`❌ | I was manually disconnected from the voice channel, clearing queue!`,color:`${client.colour}`}]});
     let x = client.config.discord.ne.find(e => e.guildId == queue.textChannel.guild.id);
     if (x) { 
         x.delete()
