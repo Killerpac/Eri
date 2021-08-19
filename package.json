@@ -7,6 +7,9 @@
   "scripts": {
     "start": "node eri.js"
   },
+  "engines": {
+    "node": "16.1.x"
+  },
   "author": "Killerpac",
   "license": "MIT",
   "dependencies": {
