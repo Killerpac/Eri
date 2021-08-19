@@ -6,7 +6,7 @@ const client = new Client({
 });
 client.config = require("./bot/config")
 client.commands = new Collection();
-client.player = new Player(client)
+client.player = new Player(client);
 client.QueryType = QueryType
 client.QueueRepeatMode = QueueRepeatMode
 client.colour = "#f542bf"
