@@ -10,6 +10,7 @@ client.player = new distube.DisTube(client,{
     leaveOnEmpty: true,
     leaveOnFinish:true,
     emptyCooldown:30000,
+    emitAddSongWhenCreatingQueue:false,
     youtubeCookie:client.config.discord.cookie,
     plugins:[new SpotifyPlugin({
         emitEventsAfterFetching: true

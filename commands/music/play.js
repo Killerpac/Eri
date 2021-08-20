@@ -12,8 +12,9 @@ module.exports = {
     if (interaction.guild.me.voice.channelId && interaction.member.voice.channelId !== interaction.guild.me.voice.channelId) {
         return void interaction.reply({ content: "You are not in my voice channel!", ephemeral: true });
     }
-        await interaction.deleteReply()
+        await interaction.deferReply()
         const query = interaction.options.get("query").value;
-        client.player.playVoiceChannel(interaction.member.voice.channel, `${query}`,{textChannel: interaction.channel})
+        const success = client.player.playVoiceChannel(interaction.member.voice.channel, `${query}`,{textChannel: interaction.channel})
+        if (success) interaction.deleteReply();
     }
 }

@@ -15,7 +15,7 @@ module.exports = {
     await interaction.deferReply();
     const queue = client.player.getQueue(interaction.guildId);
     if (!queue || !queue.playing) return void interaction.followUp({ content: "❌ | No music is being played!" });
-    await queue.filters().includes("bassboost") ? queue.setFilters("bassboost") : queue.setFilters(false);
-    return void interaction.followUp({ content: `🎵 | Bassboost ${queue.filters().includes("bassboost") ? "Enabled" : "Disabled"}!` });
+    await queue.filters.includes("bassboost") ? queue.setFilter(false): queue.setFilter("bassboost");
+    return void interaction.followUp({ content: `🎵 | Bassboost ${queue.filters.includes("bassboost") ? "Enabled" : "Disabled"}!` });
     }
 }
