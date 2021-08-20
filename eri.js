@@ -7,9 +7,6 @@ client.config = require("./bot/config")
 client.commands = new Collection();
 client.colour = "#f542bf"
 client.player = new distube.DisTube(client,{
-    leaveOnEmpty: true,
-    leaveOnFinish:true,
-    emptyCooldown:30000,
     emitAddSongWhenCreatingQueue:false,
     youtubeCookie:client.config.discord.cookie,
     plugins:[new SpotifyPlugin({
