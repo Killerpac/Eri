@@ -8,7 +8,7 @@ tags:
 
 ## Eri
 
-Slash commands music bot backed by **Discord Player**.
+Slash commands music bot backed by **Distube**.
 
 ## ✨ Features
 
