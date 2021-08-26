@@ -16,6 +16,7 @@ module.exports = {
             const queue = client.player.getQueue(interaction.guildId);
             if (!queue || !queue.playing) return void interaction.followUp({ content: "❌ | No music is being played!" });
             const currentTrack = queue.songs[0];
+            if(queue.songs.length <=1) return void interaction.followUp({ content: "❌ | Queue is Empty!! Add Some Music" });
             const success = queue.skip();
             return void interaction.followUp({
                 content: success ? `✅ | Skipped **${currentTrack.name}**!` : "❌ | Something went wrong!"

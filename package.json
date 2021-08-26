@@ -3,7 +3,10 @@
   "version": "2.1.0",
   "description": "Simple music bot created with Distube",
   "main": "index.js",
-  "repository": "https://github.com/Killerpac/Eri",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Killerpac/Eri.git"
+  },
   "scripts": {
     "start": "node eri.js"
   },
@@ -24,5 +27,13 @@
     "ffmpeg-static": "^4.4.0",
     "libsodium-wrappers": "^0.7.9",
     "ytdl-core": "^4.9.1"
+  },
+  "bugs": {
+    "url": "https://github.com/Killerpac/Eri/issues"
+  },
+  "homepage": "https://github.com/Killerpac/Eri#readme",
+  "keywords": [],
+  "devDependencies": {
+    "node": "^16.6.1"
   }
 }
