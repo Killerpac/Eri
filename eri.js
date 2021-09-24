@@ -5,9 +5,10 @@ const { SpotifyPlugin } = require("@distube/spotify");
 const client = new Client({ intents: [Intents.FLAGS.GUILDS,Intents.FLAGS.GUILD_MESSAGES,Intents.FLAGS.GUILD_VOICE_STATES,Intents.FLAGS.GUILDS] });
 client.config = require("./bot/config")
 client.commands = new Collection();
-client.colour = "#f542bf"
-client.player = new distube.DisTube(client,{
+client.colour = "#17BEBB"
+client.player = new distube.DisTube(client, {
     emitAddSongWhenCreatingQueue:false,
+    leaveOnFinish:false,
     youtubeCookie:client.config.discord.cookie,
     plugins:[new SpotifyPlugin({
         emitEventsAfterFetching: true

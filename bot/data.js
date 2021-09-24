@@ -55,12 +55,12 @@ module.exports = {
         ]
     },
     {
-        name: "skip",
-        description: "Skip to the current song"
-    },
-    {
         name: "shuffle",
         description: "Shuffles The Queue"
+    },
+    {
+        name: "skip",
+        description: "Skip to the current song"
     },
     {
         name: "queue",
@@ -69,6 +69,10 @@ module.exports = {
     {
         name: "pause",
         description: "Pause the current song"
+    },
+    {
+      name: "uptime",
+      description: "Shows The Bot Uptime"
     },
     {
         name: "resume",

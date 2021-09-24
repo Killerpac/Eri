@@ -15,6 +15,7 @@ module.exports = {
     await interaction.deferReply();
     const queue = client.player.getQueue(interaction.guildId);
     if (!queue || !queue.playing) return void interaction.followUp({ content: "❌ | No music is being played!" });
+
     await queue.autoplay ? queue.toggleAutoplay(true): queue.toggleAutoplay(false);
     return void interaction.followUp({ content: `🎵 | AutoPlay ${queue.autoplay ? "Enabled" : "Disabled"}!` });
     }

@@ -17,15 +17,17 @@
   "license": "MIT",
   "dependencies": {
     "@discordjs/opus": "^0.5.3",
-    "@discordjs/rest": "^0.1.0-canary.0",
+    "@discordjs/rest": "0.1.0-canary.0",
     "@discordjs/voice": "^0.5.6",
-    "@distube/spotify": "^0.6.2",
+    "@distube/spotify": "^0.6.4",
     "discord-api-types": "^0.22.0",
     "discord.js": "^13.1.0",
-    "distube": "^3.0.0-beta.36",
+    "distube": "^3.0.0-beta.39",
     "dotenv": "^10.0.0",
     "ffmpeg-static": "^4.4.0",
     "libsodium-wrappers": "^0.7.9",
+    "moment": "^2.29.1",
+    "moment-duration-format": "^2.3.2",
     "ytdl-core": "^4.9.1"
   },
   "bugs": {
@@ -34,6 +36,6 @@
   "homepage": "https://github.com/Killerpac/Eri#readme",
   "keywords": [],
   "devDependencies": {
-    "node": "^16.6.1"
+    "node": "^16.9.1"
   }
 }

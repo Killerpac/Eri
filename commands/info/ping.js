@@ -1,6 +1,6 @@
 module.exports = {
     name: 'ping',
-    category: 'Music',
+    category: 'info',
     utilisation: '/ping',
 
     async execute(client, interaction) {
