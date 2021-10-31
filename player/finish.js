@@ -6,8 +6,5 @@ module.exports = async (client, queue) => {
         let y = client.config.discord.ne.indexOf(x)
         client.config.discord.ne.splice(y, 1)
     }
-    client.timeout = setTimeout(() => {
-        queue.stop();
-        client.timeout = false;
-    }, 30000);
+
 }

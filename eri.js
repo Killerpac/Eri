@@ -6,7 +6,6 @@ const client = new Client({ intents: [Intents.FLAGS.GUILDS,Intents.FLAGS.GUILD_M
 client.config = require("./bot/config")
 client.commands = new Collection();
 client.colour = "#17BEBB";
-client.timeout
 client.player = new distube.DisTube(client, {
     emitAddSongWhenCreatingQueue:false,
     leaveOnFinish:false,
@@ -36,7 +35,7 @@ for (const file of events) {
 };
 
 for (const file of player) {
-    console.log(`Loading discord-player event ${file}`);
+    console.log(`Loading Distube event ${file}`);
     const event = require(`./player/${file}`);
     client.player.on(file.split(".")[0], event.bind(null, client));
 }
