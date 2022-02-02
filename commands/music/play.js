@@ -14,7 +14,7 @@ module.exports = {
     }
         await interaction.deferReply()
         const query = interaction.options.get("query").value;
-        const success = client.player.playVoiceChannel(interaction.member.voice.channel, `${query}`,{textChannel: interaction.channel})
+        const success = client.player.play(interaction.member.voice.channel, `${query}`,{textChannel: interaction.channel})
         if (success) interaction.deleteReply();
         if(client.timeout){
             clearTimeout(client.timeout)

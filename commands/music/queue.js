@@ -12,15 +12,15 @@ module.exports = {
     if (interaction.guild.me.voice.channelId && interaction.member.voice.channelId !== interaction.guild.me.voice.channelId) {
         return void interaction.reply({ content: "You are not in my voice channel!", ephemeral: true });
     }
-    await interaction.deferReply();
+    await interaction.deferUpdate();
     const queue = client.player.getQueue(interaction.guildId);
-    if (!queue || !queue.playing) return void interaction.followUp({ content: "❌ | No music is being played!" });
+    if (!queue || !queue.playing) return void interaction.channel.send({ content: "❌ | No music is being played!" });
     const currentsong = queue.songs[0];
     const songs = queue.songs.slice(0, 10).map((m, i) => {
         return `${i + 1}. **${m.name}**`;
     });
 
-    return void interaction.followUp({
+    return void interaction.channel.send({
         embeds: [
             {
                 title: "Server Queue",

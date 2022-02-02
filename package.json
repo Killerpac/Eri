@@ -17,18 +17,19 @@
   "license": "MIT",
   "dependencies": {
     "@discordjs/opus": "^0.7.0",
-    "@discordjs/rest": "0.2.0-canary.0",
-    "@discordjs/voice": "^0.7.5",
-    "@distube/spotify": "^1.0.0",
+    "@discordjs/rest": "0.3.0",
+    "@discordjs/voice": "^0.8.0",
+    "@distube/spotify": "^1.1.0",
+    "@distube/yt-dlp": "^0.0.2",
     "discord-api-types": "^0.26.1",
-    "discord.js": "^13.5.0",
-    "distube": "^3.0.5",
-    "dotenv": "^10.0.0",
-    "ffmpeg-static": "^4.4.0",
+    "discord.js": "^13.6.0",
+    "distube": "^3.3.0",
+    "dotenv": "^15.0.0",
+    "ffmpeg-static": "^4.4.1",
     "moment": "^2.29.1",
     "moment-duration-format": "^2.3.2",
     "tweetnacl": "^1.0.3",
-    "ytdl-core": "^4.9.2"
+    "ytdl-core": "^4.10.1"
   },
   "bugs": {
     "url": "https://github.com/Killerpac/Eri/issues"

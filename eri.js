@@ -7,6 +7,7 @@ client.config = require("./bot/config")
 client.commands = new Collection();
 client.colour = "#17BEBB";
 client.player = new distube.DisTube(client, {
+    youtubeDL:false,
     emitAddSongWhenCreatingQueue:false,
     leaveOnFinish:false,
     youtubeCookie:client.config.discord.cookie,
