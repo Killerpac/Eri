@@ -11,7 +11,7 @@
     "start": "node eri.js"
   },
   "engines": {
-    "node": "^17.1.x"
+    "node": "^17.x.x"
   },
   "author": "Killerpac",
   "license": "MIT",
