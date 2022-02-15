@@ -93,5 +93,17 @@ module.exports = {
     {
         name: "autoplay",
         description: "Toggles Autoplay"
-    }
+    },
+    {
+        name: "skipto",
+        description: "Skip to the selected song",
+        options: [
+            {
+                name: "index",
+                type: 4,
+                description: "index of song in queue",
+                required: true
+            }
+        ]
+    },
 ] };

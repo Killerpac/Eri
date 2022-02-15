@@ -2,7 +2,7 @@
   "name": "eri",
   "version": "2.1.0",
   "description": "Simple music bot created with Distube",
-  "main": "index.js",
+  "main": "eri.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Killerpac/Eri.git"
