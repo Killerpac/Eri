@@ -1,4 +1,5 @@
 const skip = require("../commands/music/skip")
+const skipto = require("../commands/music/skipto")
 const stop = require("../commands/music/stop")
 const queue = require("../commands/music/queue")
 const pp = require('../bot/buttons')
@@ -52,6 +53,12 @@ module.exports = async (client,interaction) =>
             queue.execute(client,interaction);
         }  
     }
+    if (interaction.isSelectMenu()) {
+        if(interaction.customId === "Qselect"){
+            skipto.execute(client,interaction);
+        }
+    }
+
     if (!interaction.isCommand() || !interaction.guildId) return;
 
 	if (!client.commands.has(interaction.commandName)) return;
