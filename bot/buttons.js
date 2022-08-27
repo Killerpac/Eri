@@ -1,46 +1,46 @@
-const { MessageActionRow , MessageButton } = require('discord.js');
+const {  ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 module.exports = {
      pause() {
-        const r = new MessageActionRow()
+        const r = new ActionRowBuilder()
         .addComponents(
-            new MessageButton()
+            new ButtonBuilder()
                 .setCustomId('pause/resumebtn')
                 .setLabel('Pause')
-                .setStyle('SUCCESS'),
-            new MessageButton()
+                .setStyle(ButtonStyle.Primary),
+            new ButtonBuilder()
                 .setCustomId('skipbtn')
                 .setLabel('Skip')
-                .setStyle('SECONDARY'),
-            new MessageButton()
+                .setStyle(ButtonStyle.Secondary),
+            new ButtonBuilder()
                 .setCustomId('stopbtn')
                 .setLabel('Stop')
-                .setStyle('DANGER'),
-            new MessageButton()
+                .setStyle(ButtonStyle.Danger),
+            new ButtonBuilder()
                 .setCustomId('queuebtn')
                 .setLabel('Show Queue')
-                .setStyle('PRIMARY')
+                .setStyle(ButtonStyle.Primary)
         );
         return r
     },
      resume() {
-        const r = new MessageActionRow()
+        const r = new ActionRowBuilder()
         .addComponents(
-            new MessageButton()
+            new ButtonBuilder()
                 .setCustomId('pause/resumebtn')
                 .setLabel('Resume')
-                .setStyle('SUCCESS'),
-            new MessageButton()
+                .setStyle(ButtonStyle.Primary),
+            new ButtonBuilder()
                 .setCustomId('skipbtn')
                 .setLabel('Skip')
-                .setStyle('SECONDARY'),
-            new MessageButton()
+                .setStyle(ButtonStyle.Secondary),
+            new ButtonBuilder()
                 .setCustomId('stopbtn')
                 .setLabel('Stop')
-                .setStyle('DANGER'),
-            new MessageButton()
+                .setStyle(ButtonStyle.Danger),
+            new ButtonBuilder()
                 .setCustomId('queuebtn')
                 .setLabel('Show Queue')
-                .setStyle('PRIMARY')
+                .setStyle(ButtonStyle.Primary)
         );
         return r
     }

@@ -1,13 +1,12 @@
-const { Client, Collection, Intents} = require("discord.js");
+const { Client, Collection, Intents , GatewayIntentBits} = require("discord.js");
 const distube = require("distube")
 const fs = require('fs');
 const { SpotifyPlugin } = require("@distube/spotify");
-const client = new Client({ intents: [Intents.FLAGS.GUILDS,Intents.FLAGS.GUILD_MESSAGES,Intents.FLAGS.GUILD_VOICE_STATES,Intents.FLAGS.GUILDS] });
+const client = new Client({ intents: [ GatewayIntentBits.Guilds ,GatewayIntentBits.GuildMessages,GatewayIntentBits.GuildVoiceStates] });
 client.config = require("./bot/config")
 client.commands = new Collection();
-client.colour = "#17BEBB";
+client.colour = 0x17BEBB;
 client.player = new distube.DisTube(client, {
-    youtubeDL:false,
     emitAddSongWhenCreatingQueue:false,
     leaveOnFinish:false,
     youtubeCookie:client.config.discord.cookie,

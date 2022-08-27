@@ -15,7 +15,7 @@ module.exports = async (client,interaction) =>
                     return void interaction.reply({ content: "You are not in a voice channel!", ephemeral: true });
                 }
             
-                if (interaction.guild.me.voice.channelId && interaction.member.voice.channelId !== interaction.guild.me.voice.channelId) {
+                if (interaction.guild.me?.voice?.channelId && interaction.member?.voice?.channelId !== interaction.guild.me?.voice?.channelId) {
                     return void interaction.reply({ content: "You are not in my voice channel!", ephemeral: true });
                 }
                         if (!query|| !query.paused) return void interaction.reply({ content: "❌ | No music is being played!" });
@@ -29,7 +29,7 @@ module.exports = async (client,interaction) =>
                     return void interaction.reply({ content: "You are not in a voice channel!", ephemeral: true });
                 }
             
-                if (interaction.guild.me.voice.channelId && interaction.member.voice.channelId !== interaction.guild.me.voice.channelId) {
+                if (interaction.guild.me?.voice?.channelId && interaction.member?.voice?.channelId !== interaction.guild.me?.voice?.channelId) {
                     return void interaction.reply({ content: "You are not in my voice channel!", ephemeral: true });
                 }
                         if (!query|| !query.playing) return void interaction.reply({ content: "❌ | No music is being played!" });

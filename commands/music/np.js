@@ -9,7 +9,7 @@ module.exports = {
         return void interaction.reply({ content: "You are not in a voice channel!", ephemeral: true });
     }
 
-    if (interaction.guild.me.voice.channelId && interaction.member.voice.channelId !== interaction.guild.me.voice.channelId) {
+    if (interaction.guild.me?.voice?.channelId && interaction.member?.voice?.channelId !== interaction.guild.me?.voice?.channelId) {
         return void interaction.reply({ content: "You are not in my voice channel!", ephemeral: true });
     }
     await interaction.deferReply();
@@ -20,7 +20,7 @@ module.exports = {
         embeds: [
             {
                 title: "Now Playing",
-                description: `🎶 | **${queue.songs[0].name}**! (\`${queue.formattedCurrentTime}%\`)`,
+                description: `🎶 | **${queue.songs[0].name}**! (\`${queue.formattedCurrentTime}\`)`,
                 color: client.colour
             }
         ]
