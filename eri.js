@@ -2,6 +2,7 @@ const { Client, Collection, Intents , GatewayIntentBits} = require("discord.js")
 const distube = require("distube")
 const fs = require('fs');
 const { SpotifyPlugin } = require("@distube/spotify");
+const { YtDlpPlugin } = require("@distube/yt-dlp");
 const client = new Client({ intents: [ GatewayIntentBits.Guilds ,GatewayIntentBits.GuildMessages,GatewayIntentBits.GuildVoiceStates] });
 client.config = require("./bot/config")
 client.commands = new Collection();
@@ -12,7 +13,7 @@ client.player = new distube.DisTube(client, {
     youtubeCookie:client.config.discord.cookie,
     plugins:[new SpotifyPlugin({
         emitEventsAfterFetching: true
-    })]
+    }),new YtDlpPlugin({ update: true })]
 });
 
 fs.readdirSync('./commands').forEach(dirs => {
