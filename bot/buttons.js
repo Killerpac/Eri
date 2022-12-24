@@ -4,9 +4,13 @@ module.exports = {
         const r = new ActionRowBuilder()
         .addComponents(
             new ButtonBuilder()
+                .setCustomId('voldownbtn')
+                .setLabel('Volume Down')
+                .setStyle(ButtonStyle.Primary),
+            new ButtonBuilder()
                 .setCustomId('pause/resumebtn')
                 .setLabel('Pause')
-                .setStyle(ButtonStyle.Primary),
+                .setStyle(ButtonStyle.Success),
             new ButtonBuilder()
                 .setCustomId('skipbtn')
                 .setLabel('Skip')
@@ -16,9 +20,9 @@ module.exports = {
                 .setLabel('Stop')
                 .setStyle(ButtonStyle.Danger),
             new ButtonBuilder()
-                .setCustomId('queuebtn')
-                .setLabel('Show Queue')
-                .setStyle(ButtonStyle.Primary)
+                .setCustomId('volupbtn')
+                .setLabel('Volume Up')
+                .setStyle(ButtonStyle.Primary),
         );
         return r
     },
@@ -26,9 +30,13 @@ module.exports = {
         const r = new ActionRowBuilder()
         .addComponents(
             new ButtonBuilder()
+                .setCustomId('voldownbtn')
+                .setLabel('Volume Down')
+                .setStyle(ButtonStyle.Primary),
+            new ButtonBuilder()
                 .setCustomId('pause/resumebtn')
                 .setLabel('Resume')
-                .setStyle(ButtonStyle.Primary),
+                .setStyle(ButtonStyle.Success),
             new ButtonBuilder()
                 .setCustomId('skipbtn')
                 .setLabel('Skip')
@@ -38,9 +46,9 @@ module.exports = {
                 .setLabel('Stop')
                 .setStyle(ButtonStyle.Danger),
             new ButtonBuilder()
-                .setCustomId('queuebtn')
-                .setLabel('Show Queue')
-                .setStyle(ButtonStyle.Primary)
+                .setCustomId('volupbtn')
+                .setLabel('Volume Up')
+                .setStyle(ButtonStyle.Primary),
         );
         return r
     }

@@ -47,10 +47,32 @@ module.exports = async (client,interaction) =>
         {
             stop.execute(client,interaction);
         }
-        else if(interaction.customId == "queuebtn")
+        else if(interaction.customId =="voldownbtn")
         {
-            queue.execute(client,interaction);
-        }  
+            if (!(interaction.member instanceof GuildMember) || !interaction.member.voice.channel) {
+                return void interaction.reply({ content: "You are not in a voice channel!", ephemeral: true });
+            }
+        
+            if (interaction.guild.me?.voice?.channelId && interaction.member?.voice?.channelId !== interaction.guild.me?.voice?.channelId) {
+                return void interaction.reply({ content: "You are not in my voice channel!", ephemeral: true });
+            }
+            if (!query|| !query.playing) return void interaction.reply({ content: "❌ | No music is being played!" });
+            query.setVolume(query.volume-10);
+            return void interaction.update({ components: [pp.pause()] })
+        }
+        else if(interaction.customId =="volupbtn")
+        {
+            if (!(interaction.member instanceof GuildMember) || !interaction.member.voice.channel) {
+                return void interaction.reply({ content: "You are not in a voice channel!", ephemeral: true });
+            }
+        
+            if (interaction.guild.me?.voice?.channelId && interaction.member?.voice?.channelId !== interaction.guild.me?.voice?.channelId) {
+                return void interaction.reply({ content: "You are not in my voice channel!", ephemeral: true });
+            }
+            if (!query|| !query.playing) return void interaction.reply({ content: "❌ | No music is being played!" });
+            query.setVolume(query.volume+10);
+            return void interaction.update({ components: [pp.pause()] })
+        }
     }
     if (!interaction.isCommand() || !interaction.guildId) return;
 
