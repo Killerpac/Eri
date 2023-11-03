@@ -55,6 +55,120 @@ module.exports = {
         ]
     },
     {
+        name: "filters",
+        description: "Apply audio filters to the track",
+        options: [
+    {
+        
+        name: "effect",
+        description: "Select the effect you want to apply",
+        type: 4,
+        choices: [
+            {
+                name: "clear",
+                value: "0"
+            },
+            {
+                name: "eightD",
+                value: "1"
+            },
+            {
+                name: "soft",
+                value: "2"
+            },
+            {
+                name: "speed",
+                value: "3"
+            },
+            {
+                name: "karaoke",
+                value: "4"
+            },
+            {
+                name: "nightcore",
+                value: "5"
+            },
+            {
+                name: "pop",
+                value: "6"
+            },
+            {
+                name: "vaporwave",
+                value: "7"
+            },
+            {
+                name: "bass",
+                value: "8"
+            },
+            {
+                name: "party",
+                value: "9"
+            },
+            {
+                name: "earrape",
+                value: "10"
+            },
+            {
+                name: "equalizer",
+                value: "11"
+            },
+            {
+                name: "electronic",
+                value: "12"
+            },
+            {
+                name: "radio",
+                value: "13"
+            },
+            {
+                name: "tremolo",
+                value: "14"
+            },
+            {
+                name: "treblebass",
+                value: "15"
+            },
+            {
+                name: "vibrato",
+                value: "16"
+            },
+            {
+                name: "china",
+                value: "17"
+            },
+            {
+                name: "chimpunk",
+                value: "18"
+            },
+            {
+                name: "darthvader",
+                value: "19"
+            },
+            {
+                name: "daycore",
+                value: "20"
+            },
+            {
+                name: "doubletime",
+                value: "21"
+            },
+            {
+                name: "pitch",
+                value: "22"
+            },
+            {
+                name: "rate",
+                value: "23"
+            },
+            {
+                name: "slow",
+                value: "24"
+            },
+        ]
+    }
+]
+    },
+    {
         name: "shuffle",
         description: "Shuffles The Queue"
     },
@@ -82,16 +196,4 @@ module.exports = {
         name: "stop",
         description: "Stop the player"
     },
-    {
-        name: "np",
-        description: "Now Playing"
-    },
-    {
-        name: "bassboost",
-        description: "Toggles bassboost filter"
-    },
-    {
-        name: "autoplay",
-        description: "Toggles Autoplay"
-    }
 ] };
