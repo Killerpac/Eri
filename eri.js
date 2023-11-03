@@ -1,5 +1,4 @@
 const { Client, Collection, Intents , GatewayIntentBits} = require("discord.js");
-const distube = require("distube")
 const fs = require('fs');
 const {Connectors} = require("shoukaku");
 const  {Kazagumo} = require("kazagumo");
@@ -9,45 +8,29 @@ const client = new Client({ intents: [ GatewayIntentBits.Guilds ,GatewayIntentBi
 client.config = require("./bot/config")
 client.commands = new Collection();
 client.colour = 0x17BEBB;
-
-async function fetchDataAndMapToNodes() {
-    try {
-      const response = await fetch('https://raw.githubusercontent.com/DarrenOfficial/lavalink-list/master/docs/SSL/lavalink-with-ssl.md');
-      if (!response.ok) {
-        throw new Error(`Failed to fetch data: ${response.status} - ${response.statusText}`);
-      }
-  
-      const data = await response.text();
-  
-      const serverPattern = /Host : (.+)[\s\S]*?Port : (\d+)[\s\S]*?Password : "([^"]+)"[\s\S]*?Secure : (true|false)/g;
-      const servers = [];
-      let match;
-      
-      while ((match = serverPattern.exec(data)) !== null) {
-        const [, host, port, password, secure] = match;
-        servers.push({
-          name: host,
-          url: host,
-          port: parseInt(port),
-          auth: password,
-          secure: secure === "true",
-        });
-      }
-  
-      return servers;
-    } catch (error) {
-      console.error('Error:', error);
-    }
-  }
-  
-// Host : lavalink.jirayu.pw
-// Port : 2333
-// Password : "jirayu.pw"
-// Secure : false
-
-fetchDataAndMapToNodes()
-  .then(Nodes => {
-    console.log(Nodes);
+const Nodes = [
+  {
+    name: 'lava1.horizxon.tech',
+    url: 'lava1.horizxon.tech',
+    port: 443,
+    auth: 'horizxon.tech',
+    secure: true
+  },
+  {
+    name: 'lava2.horizxon.tech',
+    url: 'lava2.horizxon.tech',
+    port: 443,
+    auth: 'horizxon.tech',
+    secure: true
+  },
+  {
+    name: 'lava3.horizxon.tech',
+    url: 'lava3.horizxon.tech',
+    port: 443,
+    auth: 'horizxon.tech',
+    secure: true
+  },
+]
     client.player =  new Kazagumo({
         plugins: [
             new KazagumoFilter(),
@@ -87,13 +70,12 @@ fetchDataAndMapToNodes()
     };
     
     for (const file of player) {
-        console.log(`Loading Distube event ${file}`);
+        console.log(`Loading Kazagumo event ${file}`);
         const event = require(`./player/${file}`);
         client.player.on(file.split(".")[0], event.bind(null, client));
     }
     
     client.login(client.config.discord.token)
     require("./reload")
-  });
 
 
