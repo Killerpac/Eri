@@ -13,11 +13,11 @@ module.exports = {
     return void interaction.reply({ content: "You are not in my voice channel!", ephemeral: true });
 }
         await interaction.deferReply({ ephemeral: true });
-        const queue = client.player.getQueue(interaction.guildId);
-        if (!queue || !queue.playing) return void interaction.followUp({ content: "❌ | No music is being played!" });
-        const success = queue.shuffle();
+        const Player = client.player.getPlayer(interaction.guildId);
+        if (!Player || !Player.playing) return void interaction.followUp({ content: "❌ | No music is being played!" });
+        const success = Player.queue.shuffle();
         return void interaction.followUp({
-            content: success ? `✅ | Shuffled The Queue` : "❌ | Something went wrong!"
+            content: success ? `✅ | Shuffled The Player` : "❌ | Something went wrong!"
     });
   }
 }

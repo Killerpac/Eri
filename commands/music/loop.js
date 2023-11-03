@@ -13,11 +13,11 @@ module.exports = {
         return void interaction.reply({ content: "You are not in my voice channel!", ephemeral: true });
     }
     await interaction.deferReply();
-    const queue = client.player.getQueue(interaction.guildId);
-    if (!queue || !queue.playing) return void interaction.followUp({ content: "❌ | No music is being played!" });
+    const player = client.player.getPlayer(interaction.guildId);
+    if (!player || !player.playing) return void interaction.followUp({ content: "❌ | No music is being played!" });
     const loopMode = interaction.options.get("mode").value;
-    const success = queue.setRepeatMode(loopMode);
-    const mode = loopMode === 1 ? "🔂" : loopMode === 2 ? "🔁" : "▶";
-    return void interaction.followUp({ content: success ? `${mode} | Updated loop mode!` : "❌ | Could not update loop mode!" });
+    const modes = ["none", "track", "queue"];
+    const success = player.setLoop(modes[loopMode]);
+    return void interaction.followUp({ content: success ? `${modes[loopMode]} | Updated loop mode!` : "❌ | Could not update loop mode!" });
    }
 }
