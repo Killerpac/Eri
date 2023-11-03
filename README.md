@@ -8,16 +8,14 @@ tags:
 
 ## Eri
 
-Slash commands music bot backed by **Distube**.
+Slash commands music bot backed by **Kazagumo**
 
 ## ✨ Features
 
 - Discord.js@13
 - JavaScript
 - Multiple Servers Support
-- Filters 
 - Volume Controls
 - Slash Commands
-- Autoplay
 
 
