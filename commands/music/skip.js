@@ -13,18 +13,14 @@ module.exports = {
         return void interaction.reply({ content: "You are not in my voice channel!", ephemeral: true });
     }
             await interaction.deferUpdate();
-            const queue = client.player.getQueue(interaction.guildId);
-            if (!queue || !queue.playing) return void interaction.channel.send({ content: "❌ | No music is being played!" });
-            const currentTrack = queue.songs[0];
-            if(!queue.autoplay)
-            {
-            if(queue.songs.length <=1) return void interaction.channel.send({ content: "❌ | Queue is Empty!! Add Some Music" });
-            }
-            const success = queue.skip();
+            const Player = client.player.getPlayer(interaction.guildId);
+            if (!Player || !Player.playing) return void interaction.channel.send({ content: "❌ | No music is being played!" });
+            const currentTrack = Player.queue.current;
+            const success = Player.skip();
             // return void interaction.channel.send({
             //     content: success ? `✅ | Skipped **${currentTrack.name}**!` : "❌ | Something went wrong!"
             
-            return void interaction.channel.send({embeds: success ? [{description:`✅ | Skipped **${currentTrack.name}**!`,color:`${client.colour}`}] : [{description:`❌ | Something went wrong!`,color:`${client.colour}`}]
+            return void interaction.channel.send({embeds: success ? [{description:`✅ | Skipped **${currentTrack.title}**!`,color:`${client.colour}`}] : [{description:`❌ | Something went wrong!`,color:`${client.colour}`}]
         });
     }
 }

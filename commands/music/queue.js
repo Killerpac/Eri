@@ -12,25 +12,26 @@ module.exports = {
     if (interaction.guild.me?.voice?.channelId && interaction.member?.voice?.channelId !== interaction.guild.me?.voice?.channelId) {
         return void interaction.reply({ content: "You are not in my voice channel!", ephemeral: true });
     }
-    await interaction.deferUpdate();
-    const queue = client.player.getQueue(interaction.guildId);
-    if (!queue || !queue.playing) return void interaction.channel.send({ content: "❌ | No music is being played!" });
-    const currentsong = queue.songs[0];
-    const songs = queue.songs.slice(0, 10).map((m, i) => {
-        return `${i + 1}. **${m.name}**`;
+    await interaction.deferReply();
+    const queue = client.player.getPlayer(interaction.guildId).queue;
+    const player = client.player.getPlayer(interaction.guildId);
+    if (!player || !player.playing) return void interaction.followUp({ content: "❌ | No music is being played!" });
+    const currentsong = queue.current;
+    const songs = queue.slice(0, 10).map((m, i) => {
+        return `${i + 1}. **${m.title}**`;
     });
 
-    return void interaction.channel.send({
+    return void interaction.followUp({
         embeds: [
             {
                 title: "Server Queue",
                 description: `${songs.join("\n")}${
-                    queue.songs.length > songs.length
-                        ? `\n...${queue.songs.length - songs.length === 1 ? `${queue.songs.length - songs.length} more song` : `${queue.songs.length - songs.length} more songs`}`
+                    queue.length > songs.length
+                        ? `\n...${queue.length - songs.length === 1 ? `${queue.length - songs.length} more song` : `${queue.length - songs.length} more songs`}`
                         : ""
                 }`,
                 color: client.colour,
-                fields: [{ name: "Now Playing", value: `🎶 | **${currentsong.name}**` }]
+                fields: [{ name: "Now Playing", value: `🎶 | **${currentsong.title}**` }]
             }
         ]
     })

@@ -13,9 +13,9 @@ module.exports = {
         return void interaction.reply({ content: "You are not in my voice channel!", ephemeral: true });
     }
     await interaction.deferReply();
-            const queue = client.player.getQueue(interaction.guildId);
-            if (!queue || !queue.paused) return void interaction.followUp({ content: "❌ | No music is being played!" });
-            const success = queue.resume();
+            const player = client.player.getPlayer(interaction.guildId)
+            if (!player || !player.paused) return void interaction.followUp({ content: "❌ | No music is being played!" });
+            const success = player.pause(false);
             return void interaction.followUp({ content: success ? "▶ | Resumed!" : "❌ | Something went wrong!" });
    }
 }

@@ -5,7 +5,7 @@ const pp = require('../bot/buttons')
 const {  GuildMember } = require('discord.js')
 module.exports = async (client,interaction) =>
 {
-    const query = client.player.getQueue(interaction.guildId);
+    const query = client.player.getPlayer(interaction.guildId);
     //buttom names pause/resumebtn,skipbtn,stopbtn,queuebtn
     if(interaction.isButton()) {
         if(interaction.customId == "pause/resumebtn")
@@ -19,7 +19,7 @@ module.exports = async (client,interaction) =>
                     return void interaction.reply({ content: "You are not in my voice channel!", ephemeral: true });
                 }
                         if (!query|| !query.paused) return void interaction.reply({ content: "❌ | No music is being played!" });
-                        query.resume();
+                        query.pause(false);
                         return void  interaction.update({
                             components:[pp.pause()]
                         })
@@ -33,7 +33,7 @@ module.exports = async (client,interaction) =>
                     return void interaction.reply({ content: "You are not in my voice channel!", ephemeral: true });
                 }
                         if (!query|| !query.playing) return void interaction.reply({ content: "❌ | No music is being played!" });
-                        query.pause();
+                        query.pause(true);
                         return void  interaction.update({
                             components:[pp.resume()]
                         })
@@ -57,7 +57,7 @@ module.exports = async (client,interaction) =>
                 return void interaction.reply({ content: "You are not in my voice channel!", ephemeral: true });
             }
             if (!query|| !query.playing) return void interaction.reply({ content: "❌ | No music is being played!" });
-            query.setVolume(query.volume-10);
+            query.setVolume(query.volume * 100 - 10 );
             return void interaction.update({ components: [pp.pause()] })
         }
         else if(interaction.customId =="volupbtn")
@@ -70,7 +70,7 @@ module.exports = async (client,interaction) =>
                 return void interaction.reply({ content: "You are not in my voice channel!", ephemeral: true });
             }
             if (!query|| !query.playing) return void interaction.reply({ content: "❌ | No music is being played!" });
-            query.setVolume(query.volume+10);
+            query.setVolume(query.volume * 100 + 10 );
             return void interaction.update({ components: [pp.pause()] })
         }
     }

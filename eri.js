@@ -1,20 +1,32 @@
 const { Client, Collection, Intents , GatewayIntentBits} = require("discord.js");
 const distube = require("distube")
 const fs = require('fs');
-const { SpotifyPlugin } = require("@distube/spotify");
-const { YtDlpPlugin } = require("@distube/yt-dlp");
+const {Connectors} = require("shoukaku");
+const  {Kazagumo} = require("kazagumo");
 const client = new Client({ intents: [ GatewayIntentBits.Guilds ,GatewayIntentBits.GuildMessages,GatewayIntentBits.GuildVoiceStates] });
 client.config = require("./bot/config")
 client.commands = new Collection();
 client.colour = 0x17BEBB;
-client.player = new distube.DisTube(client, {
-    emitAddSongWhenCreatingQueue:false,
-    leaveOnFinish:false,
-    youtubeCookie:client.config.discord.cookie,
-    plugins:[new SpotifyPlugin({
-        emitEventsAfterFetching: true
-    }),new YtDlpPlugin({ update: true })]
-});
+// Host : lavalink.jirayu.pw
+// Port : 2333
+// Password : "jirayu.pw"
+// Secure : false
+const Nodes = [ {
+    name: "lavaplayer",
+    url: "lava1.horizxon.tech",
+    port: 443,
+    auth: "horizxon.tech",
+    secure: true,
+}]
+
+client.player =  new Kazagumo({
+    defaultSearchEngine: "youtube_music",
+    // MAKE SURE YOU HAVE THIS
+    send: (guildId, payload) => {
+        const guild = client.guilds.cache.get(guildId);
+        if (guild) guild.shard.send(payload);
+    }
+}, new Connectors.DiscordJS(client), Nodes);
 
 fs.readdirSync('./commands').forEach(dirs => {
     const commands = fs.readdirSync(`./commands/${dirs}`).filter(files => files.endsWith('.js'));
